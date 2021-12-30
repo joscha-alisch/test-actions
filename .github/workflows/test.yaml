@@ -1,5 +1,8 @@
 name: Changelog
+on:
+  push: ['main']
 
+  
 jobs:
   changelog:
     runs-on: ubuntu-20.04
