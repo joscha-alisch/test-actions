@@ -11,3 +11,9 @@ jobs:
     steps:
       - run: |
           echo "${{github.ref}}"
+      - name: Tag with only version
+        id: tag
+        run: |
+          TAG=$(echo "${{ github.ref }}" | sed -e "s/dyve-//")
+          echo "::set-output name={tag}::{${TAG}}"
+          git tag "$TAG"
