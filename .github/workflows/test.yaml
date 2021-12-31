@@ -1,23 +1,20 @@
 name: Release
-on:
-  create:
-    tags:
-      - "dyve-[0-9]+.[0-9]+.[0-9]+"
-
+on: push
 
 jobs:
-  release:
+  job1: 
     runs-on: ubuntu-latest 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - run: |
-          echo "${{github.ref}}"
-      - name: Tag with only version
-        id: tag
+      - name: Output
+        id: out
         run: |
-          TAG=$(echo "${{ github.ref }}" | sed -e "s/dyve-//")
-          echo "::set-output name={tag}::{${TAG}}"
-          git tag "$TAG"
+          echo "::set-output name={greet}::{hi}"
+    outputs:
+      greet: ${{steps.out.outputs.greet}}
+  job2:
+    runs-on: ubuntu-latest 
+    needs:
+      - job1
+    steps:
+      - run: |
+          echo ${{needs.job1.outputs.greet}}
