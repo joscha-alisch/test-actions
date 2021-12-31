@@ -9,6 +9,10 @@ jobs:
   release:
     runs-on: ubuntu-latest 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - run: |
           echo "${{github.ref}}"
       - name: Tag with only version
