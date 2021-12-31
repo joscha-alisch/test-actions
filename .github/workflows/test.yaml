@@ -1,14 +1,12 @@
-name: Changelog
-on: push
+name: Release
+on:
+  create:
+    tags:
+      - "dyve-[0-9]+.[0-9]+.[0-9]+"
+
 
 jobs:
-  changelog:
-    runs-on: ubuntu-20.04
+  release:
     steps:
-      - name: "Generate release changelog"
-        id: changelog
-        uses: heinrichreimer/github-changelog-generator-action@v2.3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }} 
       - run: |
-          echo "${{ steps.changelog.outputs.changelog }}"
+          echo "${{github.ref}}"
